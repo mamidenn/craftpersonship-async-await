@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restore",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["restore", "--nologo"]
+    },
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "--no-restore", "--nologo"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "restore"
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "--no-build",
+        "--nologo",
+        "--logger",
+        "console;verbosity=normal"
+      ],
+      "dependsOn": "build",
+      "group": { "kind": "test", "isDefault": true }
+    }
+  ]
+}
